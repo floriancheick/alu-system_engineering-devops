@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#This script connect to server without password
+#ssh client is configure to  use the private key
+
+cat ~/.ssh/id_rsa.pub | ssh school@3.80.222.106 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
