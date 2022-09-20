@@ -2,4 +2,4 @@
 #This script connect to server without password
 #ssh client is configure to  use the private keys
 
-ssh -A school@3.80.222.106
+ssh -A ubuntu@3.80.222.106
