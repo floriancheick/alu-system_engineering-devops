@@ -5,4 +5,4 @@
 #PasswordAuthentication no
 #IdentityFile ~/.ssh/school
 
-ssh -A ubuntu@3.80.222.106
+ssh -A 4810-web-01@3.80.222.106
