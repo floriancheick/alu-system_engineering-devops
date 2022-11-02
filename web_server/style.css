@@ -3,18 +3,18 @@ html {
 }
 .effect {
     position: fixed;
-    display:flex;    width: 100%;
+    display:block;    width: 100%;
     height: 100%;
     background-color: rgb(133, 0, 0);
 }
 .effect h1 {
-    font-size: 40px;
+    font-size: 60px;
     color: rgb(0, 0, 0);
     font-weight: 400;
     text-align: center;
 }
 .effect p {
-    font-size: 5px;
+    font-size: 30px;
     color: rgb(255, 255, 255);
     text-align: center;
 }
