@@ -1,0 +1,20 @@
+html {
+    scroll-behavior: smooth;
+}
+.effect {
+    position: fixed;
+    display: none;    width: 100%;
+    height: 100%;
+    background-color: rgb(133, 0, 0);
+}
+.effect h1 {
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    text-align: center;
+}
+.effect p {
+    font-size: 5px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
