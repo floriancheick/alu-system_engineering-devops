@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 # this script install nginx
+#!/usr/bin/env bash
+# this script install nginx
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-echo "Holberton School" | sudo  tee /var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
-REDIRECT_301="\\\trewrite ^/redirect_me https://google.com permanent;"
-sudo sed -i "41i $REDIRECT_301" /etc/nginx/sites-available/default
-REDIRECT_404="\\\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}\n"
-sudo sed -i "44i $REDIRECT_404" /etc/nginx/sites-available/default
-sudo service nginx start
+sudo apt update -y
+sudo apt install nginx -y
+echo "Ceci n'est pas une page" > /var/www/html/error404.html &&
+    # store configuration content
+    new_config=\
+	      "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    error_page 404 /error404.html;
+    server_name _;
+    location / {
+         try_files \$uri \$uri/ =404;
+        }
+    }"
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
+echo "$new_config" > /etc/nginx/sites-available/default
+sudo service nginx restart
