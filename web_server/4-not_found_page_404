@@ -1,24 +1,14 @@
 #!/usr/bin/env bash
 # this script install nginx
-#!/usr/bin/env bash
-# this script install nginx
 
-sudo apt update -y
-sudo apt install nginx -y
-echo "Ceci n'est pas une page" > /var/www/html/error404.html &&
-    # store configuration content
-    new_config=\
-	      "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-    error_page 404 /error404.html;
-    server_name _;
-    location / {
-         try_files \$uri \$uri/ =404;
-        }
-    }"
-sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
-echo "$new_config" > /etc/nginx/sites-available/default
+REDIR="\\\tlocation /redirect_me {\n\t\t return 301 https://onepiece.fandom.com/wiki/One_Piece_Wiki;\n\t}\n"
+ERRDIR="\\\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}\n"
+SRC="/etc/nginx/sites-enabled/default"
+apt-get -y update
+apt-get -y install nginx
+sudo service nginx start
+echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
+sudo sed -i "30i $REDIR" $SRC
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+sudo sed -i "40i $ERRDIR" $SRC
 sudo service nginx restart
