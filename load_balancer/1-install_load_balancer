@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # This script install and configure haproxy.
-# update system and install haproxy
 sudo apt update
 sudo apt install haproxy -y
 load_balance_config=\
