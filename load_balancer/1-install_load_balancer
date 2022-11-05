@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
-#setting up load balancing
-sudo apt update -y
+# This script install and configure haproxy.
+# update system and install haproxy
+sudo apt update
 sudo apt install haproxy -y
-echo 'ENABLED=1' | sudo tee -a /etc/default/haproxy
-CONFIG="\
-backend web-backend
-balance roundrobin
-server 4810-web-01 54.242.159.91:80 check
-server 4810-web-02 34.227.9.170:80 check
-frontend http
-bind *:80
-mode http
-default_backend web-backend
+load_balance_config=\
+"backend my_servers
+        balance roundrobin
+        server 4810-web-01 54.242.159.91:80
+        server 4810-web-02 34.227.9.170:80
+frontend haproxy_inbound
+        bind *:80
+        default_backend my_servers
+        mode http
 "
-sudo tee -a /etc/haproxy/haproxy.cfg
-sudo service haproxy restart
+# enable haproxy to be managed by init script
+sudo chown -R "$USER":"$USER" /etc/default/haproxy
+sudo chown -R "$USER":"$USER" /etc/haproxy/haproxy.cfg
+sudo echo "ENABLED=1" >> /etc/default/haproxy
+sudo echo $load_balance_config >> /etc/haproxy/haproxy.cfg
+sudo service haproxy start
