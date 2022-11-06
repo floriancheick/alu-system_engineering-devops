@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # A program that install nginx and configure it with custom header.
+#
+#
 sudo apt update -y
 sudo apt install nginx -y
 # store new_config with custom header
