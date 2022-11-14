@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # This script is configure to port 80
-sed -i 's/8080/80/g' /etc/ngninx/sites-enabled/default
+sed -i 's/enabled/available/g' /etc/nginx/nginx.conf
 sudo service nginx restart
